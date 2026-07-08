@@ -32,8 +32,6 @@ print("Task 2:", greet("Kim"))
 def calc(num1, num2, operation="multiply"):
     try: 
         match operation:
-            case "division by zero":
-                return "You can't divide by 0!"
             case "add":
                 return num1 + num2
             case "subtract":
@@ -234,7 +232,7 @@ def pig_latin(str):
     for word in words:
         if word[0] in vowels:
             result.append(word + "ay")
-            break
+            continue
 
         for i, letter in enumerate(word):
             if letter in vowels:
