@@ -23,6 +23,7 @@ def read_employees():
 
     except Exception as e:
         print(f"An error occurred: {e}")
+        exit(1)
 
     # add list of rows to employees_dict
     employees_dict["rows"] = employees_rows
@@ -278,14 +279,7 @@ def write_sorted_list():
         for row in sorted_minutes_list:
             writer.writerow(row)
 
-    # create list
-    converted_list = []
-
-    # append data rows from sorted_minutes_list
-    for row in sorted_minutes_list:
-        converted_list.append(row)
-
-    # print(f"Task 15 | Converted list: {converted_list}")
-    return converted_list
+    # print(f"Task 15 | Sorted minutes list: {sorted_minutes_list}")
+    return sorted_minutes_list
 
 write_sorted_list()
