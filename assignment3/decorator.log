@@ -1,0 +1,15 @@
+function: greeting
+positional parameters: none
+keyword parameters: none
+return: None
+
+function: birthdate
+positional parameters: [8, 19, 'nineteen ninety-one']
+keyword parameters: none
+return: True
+
+function: user
+positional parameters: none
+keyword parameters: {'user': 'Gianni', 'role': 'developer'}
+return: <function logger_decorator at 0x1052a7110>
+
