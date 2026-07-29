@@ -119,9 +119,9 @@ print(f"Filled missing values:\n {clean_data}")
 clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors="coerce", format="mixed")
 print(f"Converted hire date:\n {clean_data}")
 
-# strip whitespace, standardize name & dept as uppercase
-clean_data["Name"] = clean_data["Name"].str.strip().str.upper()
-# clean_data["Name"] = clean_data["Name"].str.upper().str.upper()
+# strip whitespace, standardize dept as uppercase
+clean_data["Name"] = clean_data["Name"].str.strip()
+# clean_data["Name"] = clean_data["Name"].str.upper()
 
 clean_data["Department"] = clean_data["Department"].str.strip().str.upper()
 # clean_data["Department"] = clean_data["Department"].str.upper()
