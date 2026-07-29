@@ -107,23 +107,21 @@ print(f"Numeric ages:\n {clean_data}")
 clean_data['Salary'] = pd.to_numeric(clean_data['Salary'], errors="coerce")
 print(f"Numeric salaries:\n {clean_data}")
 
+# convert hire date to datetime
+# "coerce" replaces placeholders with NaT, format="mixed" allows multiple formats
+clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors="coerce", format="mixed")
+print(f"Converted hire date:\n {clean_data}")
+
 # fill NaN values with mean age, median salary
 clean_data['Age'] = clean_data['Age'].fillna(clean_data['Age'].mean())
 clean_data['Salary'] = clean_data['Salary'].fillna(clean_data['Salary'].median())
 print(f"Filled missing values:\n {clean_data}")
 
-# convert hire date to datetime
-# "coerce" replaces placeholders with NaT
-clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors="coerce")
-# format="mixed" allows multiple formats
-# clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], format="mixed")
-print(f"Converted hire date:\n {clean_data}")
-
-# strip whitespace, standardize name & dept as uppercase
+# strip whitespace, standardize dept as uppercase
 clean_data["Name"] = clean_data["Name"].str.strip()
-clean_data["Name"] = clean_data["Name"].str.upper()
+# clean_data["Name"] = clean_data["Name"].str.upper()
 
-clean_data["Department"] = clean_data["Department"].str.strip()
-clean_data["Department"] = clean_data["Department"].str.upper()
+clean_data["Department"] = clean_data["Department"].str.strip().str.upper()
+# clean_data["Department"] = clean_data["Department"].str.upper()
 
 print(f"Uppercase standardization:\n {clean_data}")
