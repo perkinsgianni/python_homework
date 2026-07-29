@@ -2,6 +2,7 @@
 
 import json
 import pandas as pd
+import numpy as np
 
 # define data dict
 data = {
@@ -97,8 +98,9 @@ print(f"Clean data:\n {clean_data}")
 clean_data = clean_data.drop_duplicates()
 print(f"Duplicates removed:\n {clean_data}")
 
-# convert age to numeric
+# replace placeholders with NaN, convert age to numeric
 # "coerce" replaces placeholders with NaN
+clean_data['Salary'] = clean_data['Salary'].replace(['unknown', 'n/a'], np.nan)
 clean_data['Age'] = pd.to_numeric(clean_data['Age'], errors="coerce")
 print(f"Numeric ages:\n {clean_data}")
 
