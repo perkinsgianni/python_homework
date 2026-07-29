@@ -2,7 +2,6 @@
 
 import json
 import pandas as pd
-import numpy as np
 
 # define data dict
 data = {
@@ -92,38 +91,30 @@ print(f"Dirty data:\n {dirty_data}")
 
 # create copy
 clean_data = dirty_data.copy()
-# print(f"Clean data:\n {clean_data}")
+print(f"Clean data:\n {clean_data}")
 
 # remove dupes
 clean_data = clean_data.drop_duplicates()
 print(f"Duplicates removed:\n {clean_data}")
 
-# convert age to numeric
+# convert age to numeric, fill NaN values with mean age
 # "coerce" replaces placeholders with NaN
 clean_data['Age'] = pd.to_numeric(clean_data['Age'], errors="coerce")
-print(f"Numeric ages:\n {clean_data}")
-
-# replace placeholders with NaN, convert salary to numeric
-# "coerce" replaces placeholders with NaN
-clean_data['Salary'] = clean_data['Salary'].replace(['unknown', 'n/a'], np.nan)
-clean_data['Salary'] = pd.to_numeric(clean_data['Salary'], errors="coerce")
-print(f"Numeric salaries:\n {clean_data}")
-
-# fill NaN values with mean age, median salary
 clean_data['Age'] = clean_data['Age'].fillna(clean_data['Age'].mean())
+print(f"Numeric, mean ages:\n {clean_data}")
+
+# convert salary to numeric, fill NaN values with median salary
+# "coerce" replaces placeholders with NaN
+clean_data['Salary'] = pd.to_numeric(clean_data['Salary'], errors="coerce")
 clean_data['Salary'] = clean_data['Salary'].fillna(clean_data['Salary'].median())
-print(f"Filled missing values:\n {clean_data}")
+print(f"Numeric, median salaries:\n {clean_data}")
 
 # convert hire date to datetime
-# "coerce" replaces placeholders with NaT, format="mixed" allows multiple formats
-clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors="coerce", format="mixed")
-print(f"Converted hire date:\n {clean_data}")
+# "coerce" replaces placeholders with NaT; format="mixed", which allows multiple formats, fails test
+clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors='coerce')
+print(f"Converted hire dates:\n {clean_data}")
 
-# strip whitespace, standardize dept as uppercase
-clean_data["Name"] = clean_data["Name"].str.strip().upper()
-# clean_data["Name"] = clean_data["Name"].str.upper()
-
+# strip whitespace, standardize name & dept as uppercase
+clean_data["Name"] = clean_data["Name"].str.strip().str.upper()
 clean_data["Department"] = clean_data["Department"].str.strip().str.upper()
-# clean_data["Department"] = clean_data["Department"].str.upper()
-
 print(f"Uppercase standardization:\n {clean_data}")
