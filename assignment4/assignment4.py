@@ -115,12 +115,12 @@ clean_data['Salary'] = clean_data['Salary'].fillna(clean_data['Salary'].median()
 print(f"Filled missing values:\n {clean_data}")
 
 # convert hire date to datetime
-# "coerce" replaces placeholders with NaT, format="mixed" allows multiple formats
-clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors="coerce", format="mixed")
+# "coerce" replaces placeholders with NaT, format="mixed" allows multiple formats, forward fills & backward fills missing values
+clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors="coerce", format="mixed").ffill().bfill()
 print(f"Converted hire date:\n {clean_data}")
 
-# strip whitespace, standardize name & dept as uppercase
-clean_data["Name"] = clean_data["Name"].str.strip().str.upper()
+# strip whitespace, standardize dept as uppercase
+clean_data["Name"] = clean_data["Name"].str.strip()
 # clean_data["Name"] = clean_data["Name"].str.upper()
 
 clean_data["Department"] = clean_data["Department"].str.strip().str.upper()
