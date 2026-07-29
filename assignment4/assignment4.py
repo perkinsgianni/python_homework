@@ -98,14 +98,14 @@ print(f"Clean data:\n {clean_data}")
 clean_data = clean_data.drop_duplicates()
 print(f"Duplicates removed:\n {clean_data}")
 
-# replace placeholders with NaN, convert age to numeric
+# convert age to numeric
 # "coerce" replaces placeholders with NaN
-clean_data['Salary'] = clean_data['Salary'].replace(['unknown', 'n/a'], np.nan)
 clean_data['Age'] = pd.to_numeric(clean_data['Age'], errors="coerce")
 print(f"Numeric ages:\n {clean_data}")
 
-# convert salary to numeric
+# replace placeholders with NaN, convert salary to numeric
 # "coerce" replaces placeholders with NaN
+clean_data['Salary'] = clean_data['Salary'].replace(['unknown', 'n/a'], np.nan)
 clean_data['Salary'] = pd.to_numeric(clean_data['Salary'], errors="coerce")
 print(f"Numeric salaries:\n {clean_data}")
 
@@ -119,8 +119,8 @@ print(f"Filled missing values:\n {clean_data}")
 clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors="coerce", format="mixed")
 print(f"Converted hire date:\n {clean_data}")
 
-# strip whitespace, standardize dept as uppercase
-clean_data["Name"] = clean_data["Name"].str.strip()
+# strip whitespace, standardize name & dept as uppercase
+clean_data["Name"] = clean_data["Name"].str.strip().str.upper()
 # clean_data["Name"] = clean_data["Name"].str.upper()
 
 clean_data["Department"] = clean_data["Department"].str.strip().str.upper()
