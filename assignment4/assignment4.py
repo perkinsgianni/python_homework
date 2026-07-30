@@ -97,20 +97,23 @@ print(f"Clean data:\n {clean_data}")
 clean_data = clean_data.drop_duplicates()
 print(f"Duplicates removed:\n {clean_data}")
 
-# convert age to numeric, fill NaN values with mean age
+# convert ages to numeric
 # "coerce" replaces placeholders with NaN
 clean_data['Age'] = pd.to_numeric(clean_data['Age'], errors="coerce")
-clean_data['Age'] = clean_data['Age'].fillna(clean_data['Age'].mean())
-print(f"Numeric, mean ages:\n {clean_data}")
+print(f"Numeric ages:\n {clean_data}")
 
-# convert salary to numeric, fill NaN values with median salary
+# convert salaries to numeric
 # "coerce" replaces placeholders with NaN
 clean_data['Salary'] = pd.to_numeric(clean_data['Salary'], errors="coerce")
+print(f"Numeric salaries:\n {clean_data}")
+
+# fill NaN values with mean ages, median salaries
+clean_data['Age'] = clean_data['Age'].fillna(clean_data['Age'].mean())
 clean_data['Salary'] = clean_data['Salary'].fillna(clean_data['Salary'].median())
-print(f"Numeric, median salaries:\n {clean_data}")
+print(f"Mean ages, median salaries:\n {clean_data}")
 
 # convert hire date to datetime
-# "coerce" replaces placeholders with NaT; format="mixed", which allows multiple formats, fails test
+# "coerce" replaces placeholders with NaT
 clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors='coerce')
 print(f"Converted hire dates:\n {clean_data}")
 
