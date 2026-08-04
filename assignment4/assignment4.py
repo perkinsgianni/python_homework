@@ -109,14 +109,16 @@ print(f"Numeric salaries:\n {clean_data}")
 
 # fill NaN values with mean ages, median salaries
 clean_data['Age'] = clean_data['Age'].fillna(clean_data['Age'].mean())
-clean_data['Salary'] = clean_data['Salary'].fillna(clean_data['Salary'].median())
+median_salary = clean_data["Salary"].median()
+clean_data["Salary"] = clean_data["Salary"].fillna(median_salary)
+# clean_data['Salary'] = clean_data['Salary'].fillna(clean_data['Salary'].median())
 print(f"Mean ages, median salaries:\n {clean_data}")
 
 # convert hire date to datetime
 # "coerce" replaces placeholders with NaT, format="mixed" allows multiple formats
 clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors="coerce", format="mixed")
-# enforce datetime type
-clean_data['Hire Date'] = clean_data['Hire Date'].fillna(pd.Timestamp('2023-01-01'))
+# fill NaT with timestamp (pd equivalent of python’s datetime) to enforce datetime type
+# clean_data['Hire Date'] = clean_data['Hire Date'].fillna(pd.Timestamp('2023-01-01'))
 print(f"Converted hire dates:\n {clean_data}")
 
 # strip whitespace, standardize name & dept as uppercase
