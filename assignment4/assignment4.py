@@ -2,6 +2,7 @@
 
 import json
 import pandas as pd
+import numpy as np
 
 # define data dict
 data = {
@@ -10,17 +11,16 @@ data = {
     'City': ['New York', 'Los Angeles', 'Chicago']
 }
 
-# convert dict to df
-df = pd.DataFrame(data)
-print(f"Original dataframe:\n {df}")
+# df = pd.DataFrame(data)
+# print(f"Original dataframe:\n {df}")
 
-# assign df to var
-task1_data_frame = df
-# print(task1_data_frame)
+# convert dict to df, assign df to var
+task1_data_frame = pd.DataFrame(data)
+print(f"Original dataframe:\n {task1_data_frame}")
 
 # create copy, insert salary column & values
 task1_with_salary = task1_data_frame.copy()
-task1_with_salary['Salary'] = 70000, 80000, 90000
+task1_with_salary['Salary'] = [70000, 80000, 90000]
 print(f"New salary column:\n {task1_with_salary}")
 
 # create copy, increment ages column by 1
@@ -102,6 +102,12 @@ print(f"Duplicates removed:\n {clean_data}")
 clean_data['Age'] = pd.to_numeric(clean_data['Age'], errors="coerce")
 print(f"Numeric ages:\n {clean_data}")
 
+# replace unknown, n/a with NaN
+clean_data["Salary"] = clean_data["Salary"].replace(
+    ["unknown", "n/a"],
+    np.nan
+)
+
 # convert salaries to numeric
 # "coerce" replaces placeholders with NaN
 clean_data['Salary'] = pd.to_numeric(clean_data['Salary'], errors="coerce")
@@ -109,14 +115,13 @@ print(f"Numeric salaries:\n {clean_data}")
 
 # fill NaN values with mean ages, median salaries
 clean_data['Age'] = clean_data['Age'].fillna(clean_data['Age'].mean())
-median_salary = clean_data["Salary"].median()
-clean_data["Salary"] = clean_data["Salary"].fillna(median_salary)
-# clean_data['Salary'] = clean_data['Salary'].fillna(clean_data['Salary'].median())
+clean_data['Salary'] = clean_data['Salary'].fillna(clean_data['Salary'].median())
 print(f"Mean ages, median salaries:\n {clean_data}")
 
 # convert hire date to datetime
 # "coerce" replaces placeholders with NaT, format="mixed" allows multiple formats
-clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors="coerce", format="mixed")
+clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors="coerce")
+
 # fill NaT with timestamp (pd equivalent of python’s datetime) to enforce datetime type
 # clean_data['Hire Date'] = clean_data['Hire Date'].fillna(pd.Timestamp('2023-01-01'))
 print(f"Converted hire dates:\n {clean_data}")
