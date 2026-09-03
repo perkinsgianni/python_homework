@@ -1,0 +1,7 @@
+Web Scraping Challenges and Resolutions
+
+Challenge: The starting page (https://owasp.org/www-project-top-ten/) only contains text; the actual vulnerabilities are on a different page
+Resolution: Scraped the first page to get the target URL link, then used driver.get() to switch over to the actual data page
+
+Challenge: The page uses complex, nested HTML styles and variations across the desktop sidebar and mobile menus. This caused text-based XPaths to break, consistently returning either 0 or 1 links
+Resolution: Abandoned XPath selectors entirely. Instead, I did a broad element sweep using driver.find_elements(By.TAG_NAME, "a") to pull all raw layout links then used string evaluation methods (.startswith("A") and ":2025" in title) to isolate the target vulnerability objects flawlessly

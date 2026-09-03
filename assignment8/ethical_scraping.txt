@@ -1,0 +1,8 @@
+Which sections of the website are restricted for crawling?
+Wikipedia restricts administrative, backend, and resource-heavy directories. This includes the internal core script folder ('/w/'), backend query hooks ('/api/'), page edit history indexes, and layout spam blacklists to prevent server overload or complete site cloning.
+
+Are there specific rules for certain user agents?
+Yes, specific rules apply to different scrapers. Hostile or resource-heavy bots like 'MJ12bot' and 'UbiCrawler' are completely blocked with 'Disallow: /'. In contrast, special administrative tools like 'IsraBot' are given open access using empty disallow rules.
+
+Reflection on the purpose of robots.txt and ethical scraping:
+Websites use robots.txt to state their access rules and server limits clearly to automated scripts. It acts as an ethical guide that helps scrapers gather data responsibly without overloading servers or entering private backend areas. Following these rules protects public digital assets and builds trust between developers and web hosts.
